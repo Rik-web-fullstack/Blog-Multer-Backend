@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="profile-pic" style="width: 100px; height: 100px; background-color: aqua;">
+        <img src="/images/upload/<%= user.profilepic %>" alt="" style="width: 100px;height: 100px;">
+    </div><br>
+    <form action="/post" method="post">
+        <input type="text" name="content" placeholder="Content">
+        <input type="submit" name="submit" placeholder="Submit">
+    </form>
+    <br>
+    <% user.posts.forEach(function(post){ %>
+        <%= post.content %>
+        <a href="/like/<%= post._id %>">
+        <%= post.likes.indexOf(user._id) === 0? "unlike" : "Like" %></a><br>
+        <small><%= post.likes.length %> Likes</small>
+    <% }) %>
+    <br><a href="/logout">log-out</a>
+</body>
+</html>
