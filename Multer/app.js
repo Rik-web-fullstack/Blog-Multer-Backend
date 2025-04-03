@@ -1,3 +1,10 @@
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+require('dotenv').config();
+const googleAI = new GoogleGenerativeAI(process.env.API_KEY);
+const model = googleAI.getGenerativeModel({
+    model: "gemini-2.0-flash",
+  });
+  
 const express=require('express')
 const app=express()
 const path=require('path')
@@ -106,4 +113,11 @@ app.post("/uploadimage",isLogged,upload.single("image"),async(req,res)=>{
     await user.save();
     res.redirect("/profile")
 })
+
+app.post("/generate-email",async(req,res)=>{
+    const {prompt}=req.body
+    const result=await model.generateContent(prompt);
+    res.send(result.response.candidates[0].content.parts[0].text)
+  })
+  
 app.listen(3000)

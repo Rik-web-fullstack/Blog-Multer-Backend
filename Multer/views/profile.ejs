@@ -9,9 +9,14 @@
     <div class="profile-pic" style="width: 100px; height: 100px; background-color: aqua;">
         <img src="/images/upload/<%= user.profilepic %>" alt="" style="width: 100px;height: 100px;">
     </div><br>
+    
     <form action="/post" method="post">
         <input type="text" name="content" placeholder="Content">
         <input type="submit" name="submit" placeholder="Submit">
+    </form>
+    <form action="/generate-email">
+        <input type="text" name="prompt" placeholder="enter desire">
+        <input type="submit" name="submit" placeholder="submit">
     </form>
     <br>
     <% user.posts.forEach(function(post){ %>
